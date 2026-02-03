@@ -1,7 +1,7 @@
 package com.jokerdb.mm.custom;
 
 import com.jokerdb.mm.custom.JokerConfigHolder;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +12,14 @@ import javax.sql.DataSource;
 public class JokerDbAutoConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     public DataSource dataSource() {
+
+        if (JokerConfigHolder.TYPE == null) {
+            throw new IllegalStateException(
+                    "JokerConfigHolder.TYPE is null! Did you forget to add @EnableJokerDb in your main application?"
+            );
+        }
         String url = buildJdbcUrl();
         String driver = getDriver();
 

@@ -30,6 +30,13 @@
     <properties>
         <java.version>21</java.version>
     </properties>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github Packages</name>
+            <url>https://maven.pkg.github.com/nainglynnaung-dev/joker_db_config</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,12 +75,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc-bom</artifactId>
-            <version>21.5.0.0</version>
-            <scope>runtime</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -101,6 +103,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>  <!-- skip building a runnable jar -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests> <!-- skip tests that initialize Spring -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
