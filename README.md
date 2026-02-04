@@ -7,6 +7,10 @@
 )
 
 
+//repo link
+https://github.com/nainglynnaung-dev/joker-config-test.git
+
+
 //dependencies plugin
 <repositories>
         <repository>
